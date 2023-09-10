@@ -4,7 +4,7 @@
 FROM node:18-alpine AS builder
 
 # Install necessary build tools and libraries
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1
+RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev
 
 # Set environment variable for production
 ARG NODE_ENV=production
