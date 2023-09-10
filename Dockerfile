@@ -17,7 +17,7 @@ COPY . /strapi
 COPY package.json ./
 
 
-RUN yarn install --production
+RUN yarn workspaces focus --production
 
 # Set PATH for node_modules binaries
 ENV PATH /strapi/node_modules/.bin:$PATH
