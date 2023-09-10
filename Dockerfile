@@ -10,6 +10,9 @@ ENV DATABASE_USERNAME=strapi
 ENV DATABASE_PASSWORD=strapi
 ENV DATABASE_SSL=false
 
+# Define a mount point
+VOLUME ["/srv/app"]
+
 # Expose the port Strapi will run on
 EXPOSE 1337
 
