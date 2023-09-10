@@ -4,9 +4,7 @@
 FROM node:18-alpine AS builder
 
 # Install necessary build tools and libraries
-RUN apk update && \
-    apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev && \
-    rm -rf /var/cache/apk/*
+RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev > /dev/null 2>&1
 
 # Install Yarn
 RUN npm install -g yarn
@@ -20,8 +18,7 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /strapi
 COPY package.json ./
 
-RUN yarn install --production
-
+RUN yarn config set network-timeout 600000 -g && yarn install --production
 
 # Set PATH for node_modules binaries
 ENV PATH /strapi/node_modules/.bin:$PATH
