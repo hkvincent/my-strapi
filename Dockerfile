@@ -13,6 +13,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 # Set working directory and copy package files
 WORKDIR /strapi
+COPY . /strapi
 COPY package.json ./
 
 RUN yarn config set network-timeout 600000 -g && yarn install --production
