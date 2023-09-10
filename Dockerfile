@@ -17,7 +17,6 @@ COPY . /strapi
 COPY package.json ./
 
 
-ENV YARN_NETWORK_TIMEOUT 600000
 RUN yarn install --production
 
 # Set PATH for node_modules binaries
