@@ -17,6 +17,7 @@ COPY . /strapi
 COPY package.json ./
 
 
+RUN npm install husky
 RUN npm install --only=production --legacy-peer-deps
 
 
