@@ -4,7 +4,12 @@
 FROM node:18-alpine AS builder
 
 # Install necessary build tools and libraries
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev
+RUN apk update && \
+    apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev && \
+    rm -rf /var/cache/apk/*
+
+# Upgrade npm to the latest version
+RUN npm install -g npm@latest
 
 # Set environment variable for production
 ARG NODE_ENV=production
@@ -15,7 +20,7 @@ WORKDIR /strapi
 COPY package.json ./
 
 # Install npm packages
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --only=production
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --omit=dev
 
 # Set PATH for node_modules binaries
 ENV PATH /strapi/node_modules/.bin:$PATH
@@ -32,7 +37,8 @@ RUN npm run build
 FROM node:18-alpine AS runtime
 
 # Install necessary runtime libraries
-RUN apk add --no-cache vips-dev
+RUN apk add --no-cache vips-dev && \
+    rm -rf /var/cache/apk/*
 
 # Set environment variable for production
 ARG NODE_ENV=production
