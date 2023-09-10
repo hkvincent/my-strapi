@@ -8,8 +8,9 @@ RUN apk update && \
     apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev && \
     rm -rf /var/cache/apk/*
 
-# Upgrade npm to the latest version
-RUN npm install -g npm@latest
+# Install Yarn
+RUN npm install -g yarn
+
 
 # Set environment variable for production
 ARG NODE_ENV=production
@@ -19,8 +20,8 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /strapi
 COPY package.json ./
 
-# Install npm packages
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --omit=dev
+RUN yarn install --production
+
 
 # Set PATH for node_modules binaries
 ENV PATH /strapi/node_modules/.bin:$PATH
