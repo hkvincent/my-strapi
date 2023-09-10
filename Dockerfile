@@ -15,10 +15,13 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /strapi
 COPY . /strapi
 COPY package.json ./
+COPY yarn.lock ./
 
+ENV PATH /opt/node_modules/.bin:$PATH
 
 # RUN npm install husky
-RUN npm install --omit=dev --legacy-peer-deps
+# RUN npm install --omit=dev --legacy-peer-deps
+RUN yarn install
 
 
 # Set PATH for node_modules binaries
@@ -44,6 +47,7 @@ ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 # MySQL Database connection environment variables
+
 
 # Set working directory
 WORKDIR /strapi
