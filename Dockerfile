@@ -17,8 +17,8 @@ COPY . /strapi
 COPY package.json ./
 
 
-RUN npm install husky
-RUN npm install --only=production --legacy-peer-deps
+# RUN npm install husky
+RUN npm install --omit=dev --legacy-peer-deps
 
 
 # Set PATH for node_modules binaries
