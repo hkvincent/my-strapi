@@ -12,7 +12,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 # Set working directory and copy package files
 WORKDIR /strapi
-COPY package.json package-lock.json ./
+COPY package.json ./
 
 # Install npm packages
 RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --only=production
