@@ -71,4 +71,4 @@ USER node
 EXPOSE 1337
 
 # Command to run Strapi
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "develop"]
