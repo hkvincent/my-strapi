@@ -8,7 +8,7 @@ RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev l
 
 
 # Set environment variable for production
-ARG NODE_ENV=production
+ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 # Set working directory and copy package files
@@ -43,7 +43,7 @@ RUN apk add --no-cache vips-dev && \
     rm -rf /var/cache/apk/*
 
 # Set environment variable for production
-ARG NODE_ENV=production
+ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 # MySQL Database connection environment variables
